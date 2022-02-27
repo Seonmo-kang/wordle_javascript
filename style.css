@@ -1,0 +1,58 @@
+head{
+    margin: 5px;
+}
+footer{
+    margin: 5px;
+}
+body{
+    text-align: center;
+}
+#title{
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#attempt{
+    width: 500px;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+
+}
+
+.tile{
+    border: 2px solid lightgray;
+    width: 80px;
+    height: 80px;
+    margin: 2.5px;
+
+    /* Text */ 
+    color: black;
+    font-size: 36px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.correct{
+    background-color: green;
+    color:  white;
+    border-color: white;
+}
+
+.present{
+    background-color: orange;
+    color: white;
+    border-color: white;
+
+}
+
+.absent{
+    background-color: brown;
+    color: white;
+    border-color: white;
+}
