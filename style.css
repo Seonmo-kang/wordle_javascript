@@ -74,7 +74,7 @@ body{
 }
 
 .absent{
-    background-color: darkgray;
+    background-color: brown;
     color: white;
     border-color: white;
 }
@@ -106,14 +106,3 @@ body{
 .wide-button{
     flex-grow: 1.5;
 }
-/* if correct css class is working then we don't need this */
-/* .key .correct{
-    background-color: green;
-    color: white;
-    border-color: white;
-}
-.key .correct{
-    background-color: ;
-    color: white;
-    border-color: white;
-} */
