@@ -1,3 +1,4 @@
+
 var secretWord = "SIMON";
 var wordLength = 5;
 var maxAttempt = 6;
@@ -8,6 +9,7 @@ var col = 0;
 
 window.onload = function(){
     initialize();
+    game();
 }
 
 function initialize() {
@@ -22,10 +24,14 @@ function initialize() {
             document.getElementById("attempt").appendChild(tile);
         }
     }
-
-    document.addEventListener("keyup",(e) => {
+}
+function game() {
+    document.addEventListener("keyup",(e)=>{
         
-        if(gameOver) return;
+        if(gameOver){
+            alert('you win!');
+            return ;
+        }
         console.log(e.code);
         // alert(e.code+" key :"+e.key);
         //e.g. e.code = keyA, e.key = A or a.
@@ -63,12 +69,12 @@ function initialize() {
                         currentTile.classList.add("absent");
                     }
                 }
-                row += 1;
-                col =0;
-                correct =0;
                 if(correct==5){
                     gameOver=true
                 }
+                row += 1;
+                col =0;
+                correct =0;
             }
             
         }
@@ -76,8 +82,6 @@ function initialize() {
         if(!gameOver && row == maxAttempt){
             document.getElementById('word').innerText = secretWord;
             alert(`Real word was ${secretWord}`);
-        }else if(gameOver){
-            alert('you win!');
         }
     })
 }
