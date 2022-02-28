@@ -1,8 +1,13 @@
-head{
-    margin: 5px;
+header{
+    font-size: large;
+    font-weight: bold;
+    padding: 25px 0px;
+    border-bottom: 1px solid black;
+    margin-bottom: 50px;
+    text-align: center;
 }
 footer{
-    margin: 5px;
+    margin: 100px 0px;
 }
 body{
     text-align: center;
@@ -12,9 +17,15 @@ body{
     font-weight: bold;
     letter-spacing: 2px;
 }
-
-#attempt{
-    width: 500px;
+.attempt-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
+}
+.attempt{
+    width: 450px;
     height: auto;
     display: flex;
     flex-wrap: wrap;
@@ -52,7 +63,7 @@ body{
 }
 
 .absent{
-    background-color: brown;
+    background-color: darkgray;
     color: white;
     border-color: white;
 }
