@@ -9,6 +9,7 @@ var col = 0;
 
 window.onload = function(){
     initialize();
+    typeKeyboard();
     game();
 }
 
@@ -46,42 +47,77 @@ function game() {
             
         }
         else if( e.code == "Backspace" ){
-            if( 0 < col && col <= wordLength){
-                col -= 1;
-            }
-            let currentTile = document.getElementById( row.toString() +'-'+ col.toString() );
-            currentTile.innerText = '';
+            typeBacksapce();
         }
         else if( e.code == "Enter"){
-            let correct=0;
-            if(col == 5){
-                for(let i=0; i< wordLength; i++){
-                    
-                    let currentTile = document.getElementById( row.toString() +'-'+ i.toString() );
-                    let letter = currentTile.innerText;
-                    console.log(letter);
-                    if( secretWord[i] == letter){
-                        currentTile.classList.add("correct");
-                        correct+=1;
-                    }else if(secretWord.includes(letter)){
-                        currentTile.classList.add("present");
-                    }else{
-                        currentTile.classList.add("absent");
-                    }
-                }
-                if(correct==5){
-                    gameOver=true
-                }
-                row += 1;
-                col =0;
-                correct =0;
+            if(col==5){
+                typeEnter();
+            }else{
+                return;
             }
-            
         }
+        loseGame();
 
-        if(!gameOver && row == maxAttempt){
-            document.getElementById('word').innerText = secretWord;
-            alert(`Real word was ${secretWord}`);
-        }
     })
+}
+
+function typeKeyboard(){
+    const keys = document.querySelectorAll(".row button");
+    for(let key of keys){
+        key.onclick = ({target}) =>{
+
+            let currentTile = document.getElementById( row.toString() +'-'+ col.toString() );
+            const data = target.getAttribute("data-key");
+            console.log("data"+data);
+            if(col<wordLength&&data!="Enter"&&data!="Backspace"){
+                    currentTile.innerText = data;
+                    console.log(data);
+                    col+=1;
+            }else if(data=="Enter"){
+                typeEnter();
+            }else if(data=="Backspace"){
+                typeBacksapce();
+            }
+        }
+    }
+}
+/* Enter function */
+function typeEnter(){
+    let correct=0;
+    if(col == 5){
+        for(let i=0; i< wordLength; i++){
+            
+            let currentTile = document.getElementById( row.toString() +'-'+ i.toString() );
+            let letter = currentTile.innerText;
+            console.log(letter);
+            if( secretWord[i] == letter){
+                currentTile.classList.add("correct");
+                correct+=1;
+            }else if(secretWord.includes(letter)){
+                currentTile.classList.add("present");
+            }else{
+                currentTile.classList.add("absent");
+            }
+        }
+        if(correct==5){
+            gameOver=true
+        }
+        row += 1;
+        col = 0;
+    }
+}
+/* Backspace function */
+function typeBacksapce() {
+    if( 0 < col && col <= wordLength){
+        col -= 1;
+    }
+    let currentTile = document.getElementById( row.toString() +'-'+ col.toString() );
+    currentTile.innerText = '';
+}
+
+function loseGame() {
+    if(!gameOver && row == maxAttempt){
+        document.getElementById('word').innerText = secretWord;
+        alert(`Real word was ${secretWord}`);
+    }
 }
