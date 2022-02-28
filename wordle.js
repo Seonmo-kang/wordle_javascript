@@ -89,14 +89,22 @@ function typeEnter(){
             
             let currentTile = document.getElementById( row.toString() +'-'+ i.toString() );
             let letter = currentTile.innerText;
+            const keyButton = document.querySelector(`[data-key=${letter}]`);
             console.log(letter);
+
             if( secretWord[i] == letter){
                 currentTile.classList.add("correct");
+                keyButton.style = "background-color: green";
+
                 correct+=1;
             }else if(secretWord.includes(letter)){
                 currentTile.classList.add("present");
+                keyButton.style = "background-color: orange";
+
             }else{
                 currentTile.classList.add("absent");
+                keyButton.style = "background-color: brown";
+
             }
         }
         if(correct==5){
