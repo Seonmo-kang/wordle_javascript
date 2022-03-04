@@ -1,12 +1,6 @@
 const express = require("express");
 const axios = require("axios").default;
 
-const newWord = require("./newWord");
-const isWord = require("./isWord");
-
-
-const router = express.Router();
-
 //env file
 require('dotenv').config();
 // const api_key = process.env.WORDS_API_KEY; 
@@ -15,6 +9,7 @@ require('dotenv').config();
 const app = express();
 
 app.use(express.static(__dirname+'/src'));
+app.use(express.static(__dirname+'/src/image'));
 
 app.get("/",(req, res)=>{
     res.render('index.html'); 
@@ -23,14 +18,11 @@ app.get("/",(req, res)=>{
 app.get("/test",(req,res)=>{
     res.send("test");
 })
-
-
-// app.get("/newWord",newWord);
-
 // success get newWord
 app.get("/newWord", async (req,res)=>{
 
     const word = await requestNewWord();
+    // res.header("Access-Control-Allow-Origin","172.31.28.143");
     res.json(word);
 })
 const requestNewWord = async () =>{
@@ -43,18 +35,14 @@ const requestNewWord = async () =>{
                 letters:5
         },
         headers: {
-          'x-rapidapi-host': 'wordsapiv1.p.rapidapi.com',
-          'x-rapidapi-key': `${process.env.WORDS_API_KEY}`
+        'x-rapidapi-host': 'wordsapiv1.p.rapidapi.com',
+        'x-rapidapi-key': `${process.env.WORDS_API_KEY}`
         }
-      };
+    };
     return axios.request(options)
     .then(response =>{
         console.log(response.data.word);
-        // if(response.data.word.includes(' ')||response.data.word.match("^[aA-zZ]{5}$")==null){
-        //     requestNewWord();
-        // }else{
             return response.data;   // including config, data, header, request, status...
-        // }
     }).catch(err=>{
         console.log(err);
     });
@@ -75,6 +63,7 @@ app.get("/isWord",(req,res)=>{
     try {
         axios.request(options)
             .then(response =>{
+                // res.header("Access-Control-Allow-Origin","172.31.28.143");
                 res.send("true");
             }).catch(err =>{
                 res.send("false");
@@ -84,8 +73,9 @@ app.get("/isWord",(req,res)=>{
         console.log(err);
     }
 });
-
-
-app.listen(8000, () =>{
+app.get( "*" ,(req,res,next)=>{
+    res.status(404).redirect("/");
+})
+app.listen(8080, () =>{
     console.log("server on");
 });
