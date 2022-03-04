@@ -1,0 +1,11 @@
+# ignore .env file
+.env
+
+# ignore .zip files
+*.zip
+
+# ignore node_modules/ file
+node_modules/
+
+# ignore package-lock.json file
+package-lock.json
