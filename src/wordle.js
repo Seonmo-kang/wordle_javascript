@@ -32,13 +32,11 @@ function initialize() {
             document.getElementById("attempt").appendChild(tile);
         }
     }
-    axios.get("http://localhost:8000/newWord")
+    axios.get("http://seonmo-kang-wordle-clone.us-east-2.elasticbeanstalk.com/newWord")
         .then(response=>{
             if(response.data.word.match("^[aA-zZ]{5}$")==null){
                 location.reload();
             }else{
-            console.log(response);
-            console.log(response.data.results[0]["definition"]);
             secretWord = response.data.word;
             hint = response.data.results[0]["definition"].toString();
             }
@@ -53,8 +51,6 @@ function game() {
             alert('you win!');
             return ;
         }
-        console.log(e.code);
-        // alert(e.code+" key :"+e.key);
         //e.g. e.code = keyA, e.key = A or a.
         if("KeyA" <= e.code && e.code <= "KeyZ"){
             if(col < wordLength){
@@ -83,14 +79,10 @@ function typeKeyboard(){
     const keys = document.querySelectorAll(".row button");
     for(let key of keys){
         key.onclick = ({target}) =>{
-
             let currentTile = document.getElementById( row.toString() +'-'+ col.toString() );
             const data = target.getAttribute("data-key");
-            console.log("data"+data);
-
             if(col<wordLength && data!="Enter" && data!="Backspace"){
                     currentTile.innerText = data;
-                    console.log(data);
                     col+=1;
             }else if(data=="Enter"){
                 isWord();
@@ -110,7 +102,6 @@ function typeEnter(){
 
         let currentTile = document.getElementById( row.toString() +'-'+ i.toString() );
         let letter = currentTile.innerText;
-        console.log(letter);
         const keyButtons = document.querySelector(`[data-key=${letter}]`);
         let letter_lowercase = letter.toLowerCase();
         
@@ -196,10 +187,10 @@ function isWord(){
         word+= currentTile.innerText.toLowerCase();
     }
     if(isDuplicated==word){
-        return popupAlert("same request");
+        return popupAlert("That word does not exist");
     }else{
         isDuplicated = word;
-        axios.get(`http://localhost:8000/isWord/?word=${word}`)
+        axios.get(`http://seonmo-kang-wordle-clone.us-east-2.elasticbeanstalk.com/isWord/?word=${word}`)
             .then(response=>{
                 if(response.data){
                     typeEnter();
