@@ -1,0 +1,27 @@
+{
+  "name": "wordle_javascript",
+  "version": "1.0.0",
+  "description": "wordle game",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seonmo-kang/wordle_javascript.git"
+  },
+  "author": "Seonmo Kang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Seonmo-kang/wordle_javascript/issues"
+  },
+  "homepage": "https://github.com/Seonmo-kang/wordle_javascript#readme",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "node-fetch": "^3.2.1"
+  }
+}
