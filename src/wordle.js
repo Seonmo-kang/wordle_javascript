@@ -1,3 +1,5 @@
+const { default: axios } = require("axios");
+
 var secretWord = "";
 var hint = "";
 var wordLength = 5;
@@ -32,6 +34,8 @@ function initialize() {
             document.getElementById("attempt").appendChild(tile);
         }
     }
+    axios.get("")
+
     axios.get("http://seonmo-kang-wordle-clone.us-east-2.elasticbeanstalk.com/newWord")
         .then(response=>{
             if(response.data.word.match("^[aA-zZ]{5}$")==null){
